@@ -29,8 +29,7 @@ pip install -r requirements.txt
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/2fa-demo.git
-cd 2fa-demo
+git clone https://github.com/sharmaaditya2003/Two_Factor_Authentication/blob/main/Two_Factor_Auth.py
 ```
 
 2. **Install the required packages:**
