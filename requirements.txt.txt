@@ -1,0 +1,4 @@
+pyotp==2.6.0
+qrcode==7.4.2
+Pillow==9.2.0
+pycryptodome==3.14.1
