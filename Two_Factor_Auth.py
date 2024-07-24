@@ -8,20 +8,19 @@ from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import pad, unpad
 from Cryptodome.Random import get_random_bytes
 
-# Store the number of failed attempts and the last attempt time for each user
 failed_attempts = defaultdict(int)
 last_attempt_time = defaultdict(float)
 
-# Maximum allowed attempts
+
 MAX_ATTEMPTS = 5
-# Block time in seconds
+
 BLOCK_TIME = 30
-# Regeneration time in seconds (5 minutes)
+
 REGEN_TIME = 300
 
-# AES key and IV (In practice, securely manage these)
-aes_key = get_random_bytes(32)  # 256-bit key
-aes_iv = get_random_bytes(16)   # 128-bit IV
+
+aes_key = get_random_bytes(32) 
+aes_iv = get_random_bytes(16)   
 
 def encrypt_secret(secret: str) -> str:
     cipher = AES.new(aes_key, AES.MODE_CBC, aes_iv)
@@ -43,7 +42,7 @@ def generate_qr_code(secret: str) -> Image:
     otp_uri = pyotp.totp.TOTP(decrypted_secret).provisioning_uri("user@example.com", issuer_name="DemoApp")
     qr = qrcode.make(otp_uri)
     
-    # Add a message to the QR code
+
     qr_image = qr.convert("RGB")
     draw = ImageDraw.Draw(qr_image)
     try:
@@ -98,13 +97,12 @@ if __name__ == "__main__":
         else:
             print("Invalid OTP!")
         
-        # Check if regeneration time has passed (optional)
         if time.time() - start_time >= REGEN_TIME:
             print("Regenerating QR code and secret key for enhanced security...")
             secret_key = generate_secret_key()
             qr_code = generate_qr_code(secret_key)
             qr_code.show()
-            start_time = time.time()  # Reset the timer
+            start_time = time.time()  
 
-    # Close the program after successful login
+   
     exit()
